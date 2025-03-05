@@ -1,5 +1,4 @@
-# Digital Image Processing - Exercise 1: Image enhance, Noise Addition & Removal
-
+# Digital Image Processing - Exercise 1: Image Enhancement, Noise Addition & Removal
 
 ---
 
@@ -32,7 +31,7 @@ pip install -r requirements.txt
 ---
 
 ### 3️⃣ **Prepare Input Images**
-Place your images inside the `images/` folder. There are 5 sample images in the `/images` folder
+Place your images inside the `images/` folder. There are 5 sample images in the `/images` folder.
 
 ---
 
@@ -49,10 +48,11 @@ Processed images will be saved in the `processed_images/` folder.
 
 Each image will have:
 - `enhanced_<filename>.jpg` → Histogram Equalization applied.
-- `noisy_<filename>.jpg` → Gaussian noise added.
+- `gaussian_noisy_<filename>.jpg` → Gaussian noise added.
+- `salt_pepper_noisy_<filename>.jpg` → Salt & Pepper noise added.
 - `arithmetic_filtered_<filename>.jpg` → Denoised with Arithmetic Mean Filter.
 - `geometric_filtered_<filename>.jpg` → Denoised with Geometric Mean Filter.
-- `gaussian_filtered_<filename>.jpg` → Denoised with Gaussian Filter.
+- `harmonic_filtered_<filename>.jpg` → Denoised with Harmonic Mean Filter.
 
 ---
 
@@ -61,19 +61,7 @@ All dependencies are installed automatically using `requirements.txt`.
 
 ---
 
-## ⚡ Example Console Output
-```bash
-Processing Fig1045(a)(iceberg).tif - Original Resolution: 566x533 pixels
-Processing Fig1049(a)(spot_shaded_text_image).tif - Original Resolution: 772x686 pixels
-Processing Fig1053(a)(cygnusloop_Xray_original).tif - Original Resolution: 566x566 pixels
-Processing Fig1061(LANDSAT_with moving target).tif - Original Resolution: 518x512 pixels
-Processing FigP1036(blobs).tif - Original Resolution: 512x512 pixels
-Processed images saved in processed_images
-```
 
----
-
-## ⚡ Example Visual Ouput
+## ⚡ Example Output
 ![Example output](./resultREADME/result1.png)
 ![Example output](./resultREADME/result2.png)
----
