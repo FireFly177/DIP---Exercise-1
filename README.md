@@ -32,14 +32,14 @@ pip install -r requirements.txt
 ---
 
 ### 3️⃣ **Prepare Input Images**
-Place your images inside the `images/` folder.
+Place your images inside the `images/` folder. There are 5 sample images in the `/images` folder
 
 ---
 
 ### 4️⃣ **Run the Script**
 Run the Python script to process images:
 ```bash
-python process_images.py
+python image_processing.py
 ```
 
 ---
@@ -63,42 +63,17 @@ All dependencies are installed automatically using `requirements.txt`.
 
 ## ⚡ Example Console Output
 ```bash
-Processing img1.jpg - Original Resolution: 540x360 pixels
-Resized img1.jpg to 1280x720 pixels
-Enhance img1.jpg Resolution: 1280x720 pixels
-Noisy img1.jpg - Resolution: 1280x720 pixels
-Filtered img1.jpg - Resolution: 1280x720 pixels
-Filtered img1.jpg - Resolution: 1280x720 pixels
-Filtered img1.jpg - Resolution: 1280x720 pixels
-Processing img2.jpg - Original Resolution: 6067x3467 pixels
-Resized img2.jpg to 1280x720 pixels
-Enhance img2.jpg Resolution: 1280x720 pixels
-Noisy img2.jpg - Resolution: 1280x720 pixels
-Filtered img2.jpg - Resolution: 1280x720 pixels
-Filtered img2.jpg - Resolution: 1280x720 pixels
-Filtered img2.jpg - Resolution: 1280x720 pixels
-Processing img3.jpg - Original Resolution: 5250x3500 pixels
-Resized img3.jpg to 1280x720 pixels
-Enhance img3.jpg Resolution: 1280x720 pixels
-Noisy img3.jpg - Resolution: 1280x720 pixels
-Filtered img3.jpg - Resolution: 1280x720 pixels
-Filtered img3.jpg - Resolution: 1280x720 pixels
-Filtered img3.jpg - Resolution: 1280x720 pixels
-Processing img4.jpg - Original Resolution: 3452x5178 pixels
-Resized img4.jpg to 1280x720 pixels
-Enhance img4.jpg Resolution: 1280x720 pixels
-Noisy img4.jpg - Resolution: 1280x720 pixels
-Filtered img4.jpg - Resolution: 1280x720 pixels
-Filtered img4.jpg - Resolution: 1280x720 pixels
-Filtered img4.jpg - Resolution: 1280x720 pixels
-Processing img5.jpg - Original Resolution: 6000x4000 pixels
-Resized img5.jpg to 1280x720 pixels
-Enhance img5.jpg Resolution: 1280x720 pixels
-Noisy img5.jpg - Resolution: 1280x720 pixels
-Filtered img5.jpg - Resolution: 1280x720 pixels
-Filtered img5.jpg - Resolution: 1280x720 pixels
-Filtered img5.jpg - Resolution: 1280x720 pixels
+Processing Fig1045(a)(iceberg).tif - Original Resolution: 566x533 pixels
+Processing Fig1049(a)(spot_shaded_text_image).tif - Original Resolution: 772x686 pixels
+Processing Fig1053(a)(cygnusloop_Xray_original).tif - Original Resolution: 566x566 pixels
+Processing Fig1061(LANDSAT_with moving target).tif - Original Resolution: 518x512 pixels
+Processing FigP1036(blobs).tif - Original Resolution: 512x512 pixels
 Processed images saved in processed_images
 ```
 
+---
+
+## ⚡ Example Visual Ouput
+![Example output](./resultREADME/result1.png)
+![Example output](./resultREADME/result2.png)
 ---

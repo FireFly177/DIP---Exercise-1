@@ -2,6 +2,7 @@ import cv2
 import numpy as np
 import os
 import matplotlib.pyplot as plt
+from PIL import Image  # For handling TIFF files
 
 # Function to apply histogram equalization (for contrast enhancement)
 def enhance_image(img):
@@ -15,11 +16,11 @@ def add_gaussian_noise(img, mean=0, sigma=40):
     return noisy_img
 
 # Function to apply Arithmetic Mean Filter (Averaging Filter)
-def arithmetic_mean_filter(img, kernel_size=7):
+def arithmetic_mean_filter(img, kernel_size=5):
     return cv2.blur(img, (kernel_size, kernel_size))
 
 # Function to apply Geometric Mean Filter
-def geometric_mean_filter(img, kernel_size=7):
+def geometric_mean_filter(img, kernel_size=5):
     img = img.astype(np.float32) + 1  # Avoid log(0)
     log_img = np.log(img)
     mean_log = cv2.blur(log_img, (kernel_size, kernel_size))
@@ -27,19 +28,38 @@ def geometric_mean_filter(img, kernel_size=7):
     return geometric_mean
 
 # Function to apply Gaussian filter for denoising
-def gaussian_filter(img, kernel_size=7):
+def gaussian_filter(img, kernel_size=5):
     return cv2.GaussianBlur(img, (kernel_size, kernel_size), 0)
+
+# Function to read images, including TIFF files
+def read_image(img_path):
+    ext = img_path.lower().split('.')[-1]
+    
+    # Use OpenCV for common formats (JPG, PNG)
+    if ext in ['jpg', 'jpeg', 'png']:
+        img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    # Use PIL for TIFF files
+    elif ext in ['tif', 'tiff']:
+        img = Image.open(img_path)
+        img = img.convert("L")  # Convert to grayscale
+        img = np.array(img)  # Convert to NumPy array for OpenCV processing
+    else:
+        print(f"Unsupported file format: {img_path}")
+        return None
+    
+    return img
 
 # Directory setup
 input_folder = "images"  # Folder containing input images
 output_folder = "processed_images"  # Folder to save processed images
 os.makedirs(output_folder, exist_ok=True)
 
-image_files = [f for f in os.listdir(input_folder) if f.endswith(('.png', '.jpg', '.jpeg'))]
+# Get list of image files (including TIFF)
+image_files = [f for f in os.listdir(input_folder) if f.endswith(('.png', '.jpg', '.jpeg', '.tif', '.tiff'))]
 
 for img_file in image_files:
     img_path = os.path.join(input_folder, img_file)
-    img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)  
+    img = read_image(img_path)  # Read image with TIFF support
 
     if img is None:
         print(f"Could not read {img_file}, skipping...")
@@ -49,34 +69,18 @@ for img_file in image_files:
     height, width = img.shape  
     print(f"Processing {img_file} - Original Resolution: {width}x{height} pixels")
 
-    # Resize image to 1280x720
-    target_width, target_height = 1280, 720
-    img_resized = cv2.resize(img, (target_width, target_height), interpolation=cv2.INTER_AREA)
-
-    # Get new dimensions after resizing
-    new_height, new_width = img_resized.shape  
-    print(f"Resized {img_file} to {new_width}x{new_height} pixels")
-
     # Step 1: Enhance Image
-    enhanced_img = enhance_image(img_resized)
-    height, width = enhanced_img.shape  
-    print(f"Enhance {img_file} Resolution: {width}x{height} pixels")
+    enhanced_img = enhance_image(img)
 
     # Step 2: Add Gaussian Noise
-    noisy_img = add_gaussian_noise(img_resized)
-    height, width = noisy_img.shape
-    print(f"Noisy {img_file} - Resolution: {width}x{height} pixels")
+    noisy_img = add_gaussian_noise(img)
 
     # Step 3: Remove Noise using different filters
     arithmetic_filtered = arithmetic_mean_filter(noisy_img)
-    height, width = arithmetic_filtered.shape
-    print(f"Filtered {img_file} - Resolution: {width}x{height} pixels")
+
     geometric_filtered = geometric_mean_filter(noisy_img)
-    height, width = arithmetic_filtered.shape
-    print(f"Filtered {img_file} - Resolution: {width}x{height} pixels")
+
     gaussian_filtered = gaussian_filter(noisy_img)
-    height, width = arithmetic_filtered.shape
-    print(f"Filtered {img_file} - Resolution: {width}x{height} pixels")
 
     # Save results
     cv2.imwrite(os.path.join(output_folder, f"enhanced_{img_file}"), enhanced_img)
