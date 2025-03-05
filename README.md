@@ -38,7 +38,7 @@ Place your images inside the `images/` folder. There are 5 sample images in the 
 ### 4️⃣ **Run the Script**
 Run the Python script to process images:
 ```bash
-python image_processing.py
+python image_processing2.py
 ```
 
 ---
